@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChatComponent } from './components/chat/chat.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import {SessionRoutingModule} from "./session-routing.module";
-import {SharedModule} from "../shared/shared.module";
+import {CoreModule} from "../core/core.module";
 
 
 @NgModule({
@@ -13,7 +13,7 @@ import {SharedModule} from "../shared/shared.module";
   ],
     imports: [
         CommonModule,
-        SharedModule,
+        CoreModule,
         SessionRoutingModule
     ]
 })

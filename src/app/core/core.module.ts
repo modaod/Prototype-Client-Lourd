@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from "../shared/shared.module";
 import {RouterModule} from "@angular/router";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatCardModule} from "@angular/material/card";
 
 
 
@@ -9,8 +11,14 @@ import {RouterModule} from "@angular/router";
   declarations: [],
   imports: [
     CommonModule,
+    RouterModule
+  ],
+  exports: [
     RouterModule,
-    SharedModule
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatCardModule,
+    FormsModule
   ]
 })
 export class CoreModule { }
