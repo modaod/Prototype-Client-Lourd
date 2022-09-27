@@ -32,10 +32,13 @@ export class RegisterComponent implements OnInit {
     this.password = new FormControl('', Validators.required);
 
   }
-  SignUp(email: string, password: string) {
+  SignUp(email: string, password: string, username: string) {
     return this.afAuth
-      .createUserWithEmailAndPassword(email, password).then(
-        
+      .createUserWithEmailAndPassword(email, password).then((result) => {
+        result.user?.updateProfile({
+        displayName: username
+      })
+      }
       )
 
       .catch((error) => {

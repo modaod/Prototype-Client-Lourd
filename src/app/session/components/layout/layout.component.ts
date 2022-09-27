@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/user.service';
-import firebase from 'firebase/compat';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Component({
   selector: 'app-layout',
@@ -8,32 +8,49 @@ import firebase from 'firebase/compat';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  messageArray = [
-    {
-      user: 'john',
-      message: 'Salut'
-    },
-    {
-      user: 'Stone',
-      message: 'What\'s up man'
-    }
-  ];
+  messageArray = Array();
+
   messageText: any;
+
   user: any;
   room: any;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, public db: AngularFireDatabase) {
 
-  ngOnInit(): void {
-    var messagesRef = firebase.database().ref('messages/');
-    messagesRef.on('value', (snapshot) => {
-  const data = snapshot.val();
-  updateStarCount(postElement, data);
-});
   }
 
+  snapshotToArray = (snapshot: any) => {
+    let returnArr = Array();
+    snapshot.forEach((childSnapshot: any) => {
+      const item = childSnapshot.val();
+      //item.key = childSnapshot.key;
+      returnArr.push(item);
+    });
+
+    return returnArr;
+  };
+
+  ngOnInit(): void {
+    var messagesRef = this.db.database.ref('messages/');
+
+    messagesRef.on('value', (data) => {
+      this.messageArray = this.snapshotToArray(data);
+    });
+
+    messagesRef.on('child_changed', (data) => {
+      this.messageArray = this.snapshotToArray(data);
+    });
+  }
+
+
   sendMessage() {
-    return false;
+    var messagesRef = this.db.database.ref('messages/');
+    var newMessagesRef = messagesRef.push();
+    console.log(this.userService.user);
+    newMessagesRef.set({
+      name: this.userService.user?.displayName?.toString() || "failedUsername",
+      text: this.messageText.toString()
+    })
   }
 
   join() {
@@ -44,7 +61,7 @@ export class LayoutComponent implements OnInit {
     console.log("in leave")
     this.userService.setUser(null)
 
-    
+
   }
 
   onLeave() {
