@@ -1,12 +1,17 @@
 {
   "name": "prototype-client-lourd",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint:fix": "npm run lint -- --fix",
+    "start:electron": "ng build --base-href ./ && electron .",
+    "build:electron": "ng build && electron-packager . --asar --ignore=/node_modules --ignore=/e2e --ignore=/src --overwrite --out=./build"
+
   },
   "private": true,
   "dependencies": {
@@ -37,6 +42,8 @@
     "@angular/cli": "~14.1.2",
     "@angular/compiler-cli": "^14.1.0",
     "@types/jasmine": "~4.0.0",
+    "electron": "^21.0.0",
+    "electron-packager": "^16.0.0",
     "jasmine-core": "~4.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
