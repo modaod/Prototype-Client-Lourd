@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/user.service';
+import firebase from 'firebase/compat';
 
 @Component({
   selector: 'app-layout',
@@ -20,9 +22,14 @@ export class LayoutComponent implements OnInit {
   user: any;
   room: any;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    var messagesRef = firebase.database().ref('messages/');
+    messagesRef.on('value', (snapshot) => {
+  const data = snapshot.val();
+  updateStarCount(postElement, data);
+});
   }
 
   sendMessage() {
@@ -34,7 +41,10 @@ export class LayoutComponent implements OnInit {
   }
 
   leave() {
+    console.log("in leave")
+    this.userService.setUser(null)
 
+    
   }
 
   onLeave() {
