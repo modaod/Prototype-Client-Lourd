@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       })
       .catch((error) => {
         // window.alert(error.message);
-        window.alert(email);
+        window.alert(error);
 
       });
   }

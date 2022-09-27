@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/user.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -15,7 +15,7 @@ export class LayoutComponent implements OnInit {
   user: any;
   room: any;
 
-  constructor(private userService: UserService, public db: AngularFireDatabase) {
+  constructor(private userService: UserService, public db: AngularFireDatabase, private router: Router) {
 
   }
 
@@ -59,8 +59,8 @@ export class LayoutComponent implements OnInit {
 
   leave() {
     console.log("in leave")
-    this.userService.setUser(null)
-
+    this.userService.logOut()
+    this.router.navigateByUrl('auth');
 
   }
 
