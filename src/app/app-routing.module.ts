@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./session/session.module').then(m => m.SessionModule) },
   { path: 'auth',  loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
 
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: 'auth' }
 ];
 
 @NgModule({
