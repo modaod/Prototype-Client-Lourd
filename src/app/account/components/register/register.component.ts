@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password).then((result) => {
         result.user?.updateProfile({
-        displayName: username
+        displayName: username + '_' +result.user.uid.substring(0,4)
       })
       }
       ).then(()=>{
