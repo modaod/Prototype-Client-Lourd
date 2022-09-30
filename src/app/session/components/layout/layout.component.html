@@ -33,7 +33,7 @@
               </div> -->
 
               <div class="row">
-                <div class="msg-box">
+                <div class="msg-box" #scroll>
                   <div *ngFor="let item of messageArray">
                     <span><strong>{{item.name}} : </strong> {{item.text}}</span>
                   </div>
