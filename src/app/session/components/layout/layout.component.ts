@@ -55,7 +55,7 @@ export class LayoutComponent implements OnInit, AfterViewChecked {
       newMessagesRef.set({
         name: this.userService.user?.displayName?.toString() || "failedUsername",
         text: this.messageText.toString(),
-        date:  new Date().toLocaleString()
+        date:  "[" + new Date().toLocaleString() +"]"
       });
     }
     this.messageText = '';
