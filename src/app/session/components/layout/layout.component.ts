@@ -44,13 +44,16 @@ export class LayoutComponent implements OnInit {
 
 
   sendMessage() {
-    var messagesRef = this.db.database.ref('messages/');
-    var newMessagesRef = messagesRef.push();
-    console.log(this.userService.user);
-    newMessagesRef.set({
-      name: this.userService.user?.displayName?.toString() || "failedUsername",
-      text: this.messageText.toString()
-    })
+    if(this.messageText) {
+      var messagesRef = this.db.database.ref('messages/');
+      var newMessagesRef = messagesRef.push();
+      console.log(this.userService.user);
+      newMessagesRef.set({
+        name: this.userService.user?.displayName?.toString() || "failedUsername",
+        text: this.messageText.toString()
+      });
+    }
+    this.messageText = '';
   }
 
   join() {

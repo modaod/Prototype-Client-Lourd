@@ -22,7 +22,7 @@
                   <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" [(ngModel)]="user" class="form-control" id="username" placeholder="Enter username">
-                     <small id="userHelp" class="form-text text-muted">Type your username.</small> 
+                     <small id="userHelp" class="form-text text-muted">Type your username.</small>
                   </div>
                 </div>
                 <div class="col sm-2">
@@ -41,7 +41,7 @@
               </div>
               <div class="row">
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" [(ngModel)]="messageText">
+                  <input type="text" class="form-control" [(ngModel)]="messageText" (keydown.enter)="sendMessage()">
                 </div>
                 <div class="col-sm-2">
                   <button type="button" class="btn btn-success pull-right" (click)="sendMessage()">Send</button>
